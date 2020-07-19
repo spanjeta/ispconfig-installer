@@ -137,14 +137,7 @@ freshclam||echo ^The error can be ignored on the first run of freshclam.
 # ERROR: Problem with internal logger (UpdateLogFile = /var/log/clamav/freshclam.log).
 service clamav-daemon start
 
-cd /tmp
-ISPSTAB=$(curl -skL https://git.ispconfig.org/ispconfig/ispconfig3/-/branches|grep branch-item.*stable|head -n1|cut -d\" -f4)
-AMAVISDPATCH=$(curl -skL https://git.ispconfig.org/ispconfig/ispconfig3/tree/${ISPSTAB}/helper_scripts|grep href.*amavisd|cut -d\" -f4|rev|cut -d\/ -f1|rev)
-curl -skLo ${AMAVISDPATCH} https://git.ispconfig.org/ispconfig/ispconfig3/raw/${ISPSTAB}/helper_scripts/${AMAVISDPATCH}
-cd /usr/sbin
-cp -pf amavisd-new amavisd-new_bak
-patch < /tmp/${AMAVISDPATCH}
-rm -f /tmp/${AMAVISDPATCH}
+
 cd $WRKDIR
 
 printmes '7.1 Install Metronome XMPP Server (optional)
